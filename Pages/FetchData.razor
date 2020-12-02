@@ -1,0 +1,46 @@
+@page "/"
+@using ShowWatch.Shared
+@inject HttpClient Http
+
+<h1>Shows I'm tracking</h1>
+
+<p>Here's a list of all your shows!</p>
+
+@if (shows == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var show in shows)
+            {
+                <tr>
+                    <td>@show.Date.ToShortDateString()</td>
+                    <td>@show.TemperatureC</td>
+                    <td>@show.TemperatureF</td>
+                    <td>@show.Summary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Show[] shows;
+
+    protected override async Task OnInitializedAsync()
+    {
+        shows = await Http.GetFromJsonAsync<Show[]>("Show");
+    }
+
+}
