@@ -2,7 +2,7 @@
 @using ShowWatch.Shared
 @inject HttpClient Http
 
-<h1>Shows I'm tracking</h1>
+<h1 class="page-title">All Shows I'm Tracking!</h1>
 
 <p>Here's a list of all your shows!</p>
 
@@ -15,9 +15,9 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Status</th>
+                <th>Title</th>
+                <th>Show Type</th>
+                <th>Where it's at</th>
                 <th></th>
             </tr>
         </thead>
@@ -25,10 +25,11 @@ else
             @foreach (var show in shows)
             {
                 <tr>
-                    <td>@show.Date.ToShortDateString()</td>
-                    <td>@show.TemperatureC</td>
-                    <td>@show.TemperatureF</td>
-                    <td>@show.Summary</td>
+                    <td>@show.Title</td>
+                    <td>@show.ShowType</td>
+                    <td>@show.Status</td>
+                    <td>@show.ReleaseDate</td>
+                    <td>@show.IsKidFriendly</td>
                 </tr>
             }
         </tbody>
